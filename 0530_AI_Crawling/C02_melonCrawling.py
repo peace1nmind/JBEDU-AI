@@ -74,7 +74,7 @@ lyrics = []
 song_data = pd.DataFrame()
 
 for n in range(len(albums)):
-    time.sleep(3)
+    time.sleep(1)
     if n <= 2:
         print()
         print(f"{n+1}번째 앨범 시작")
@@ -127,8 +127,11 @@ for n in range(len(albums)):
                 # 노래 가사
                 # 가사가 없는 경우 오류 수정 필요
                 lyric = driver.find_element(By.ID,
-                                            'd_video_summary'
+                                            'lyricArea'
                                             ).text.replace("\n", ". ")
+                if '[가사 준비중]' in lyric:
+                    lyric = '가사 없음'
+
                 lyrics.append(lyric)
 
                 print(f"{i}번째 노래 완료")
